@@ -1,7 +1,15 @@
 FactoryGirl.define do
   factory :idea do
-    title  "My Greatest Idea"
-    body   "so great"
+    title
+    body
     quality 0
+  end
+
+  sequence :title do |n|
+    "Title Name #{n}"
+  end
+
+  sequence :body do |n|
+    "idea body #{n}"
   end
 end
