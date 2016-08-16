@@ -15,4 +15,11 @@ RSpec.describe Idea, type: :model do
     expect(idea2.quality).to eq("plausible")
     expect(idea3.quality).to eq("genius")
   end
+
+  it "returns ideas in order of last created_at" do
+    idea1 = create(:idea)
+    idea2 = create(:idea)
+
+    expect(Idea.all_descending).to eq [idea2, idea1]
+  end
 end

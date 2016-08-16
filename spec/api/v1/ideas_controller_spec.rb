@@ -13,9 +13,9 @@ RSpec.describe "api::v1::ideas controller" do
 
     expect(data.count).to eq 2
     expect(data.first.keys).to eq ["title", "body", "quality"]
-    expect(data[0]["title"]).to eq "Title Name 1"
-    expect(data[0]["quality"]).to eq "swill"
-    expect(data[1]["title"]).to eq "Title Name 2"
+    expect(data[0]["title"]).to eq "Title Name 2"
+    expect(data[1]["title"]).to eq "Title Name 1"
+    expect(data[1]["quality"]).to eq "swill"
   end
 
 
