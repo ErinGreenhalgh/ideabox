@@ -13,8 +13,20 @@ RSpec.describe "api::v1::ideas controller" do
 
     expect(data.count).to eq 2
     expect(data.first.keys).to eq ["title", "body", "quality"]
-    expect(data[0]["title"]).to eq "Title Name 1"
-    expect(data[0]["quality"]).to eq "swill"
-    expect(data[1]["title"]).to eq "Title Name 2"
+    expect(data[0]["title"]).to eq "Title Name 2"
+    expect(data[1]["title"]).to eq "Title Name 1"
+    expect(data[1]["quality"]).to eq "swill"
+  end
+
+
+  it "can create an idea" do
+    idea_data = {title: "My New Idea", body: "best idea yet"}
+    post "/api/v1/ideas", params: {idea: idea_data}
+    expect(response).to be_success
+    expect(Idea.count).to eq 1
+    idea = Idea.last
+    expect(idea.title).to   eq idea_data[:title]
+    expect(idea.body).to    eq idea_data[:body]
+    expect(idea.quality).to eq "swill"
   end
 end
