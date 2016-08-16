@@ -17,4 +17,16 @@ RSpec.describe "api::v1::ideas controller" do
     expect(data[0]["quality"]).to eq "swill"
     expect(data[1]["title"]).to eq "Title Name 2"
   end
+
+
+  it "can create an idea" do
+    idea_data = {title: "My New Idea", body: "best idea yet"}
+    post "/api/v1/ideas", params: {idea: idea_data}
+    expect(response).to be_success
+    expect(Idea.count).to eq 1
+    idea = Idea.last
+    expect(idea.title).to   eq idea_data[:title]
+    expect(idea.body).to    eq idea_data[:body]
+    expect(idea.quality).to eq "swill"
+  end
 end
