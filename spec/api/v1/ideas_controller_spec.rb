@@ -18,7 +18,6 @@ RSpec.describe "api::v1::ideas controller" do
     expect(data[1]["quality"]).to eq "swill"
   end
 
-
   it "can create an idea" do
     idea_data = {title: "My New Idea", body: "best idea yet"}
     post "/api/v1/ideas", params: {idea: idea_data}
@@ -28,5 +27,13 @@ RSpec.describe "api::v1::ideas controller" do
     expect(idea.title).to   eq idea_data[:title]
     expect(idea.body).to    eq idea_data[:body]
     expect(idea.quality).to eq "swill"
+  end
+
+  it "can delete an idea" do
+    idea = create(:idea)
+    expect(Idea.count).to eq 1
+    delete "/api/v1/ideas/#{idea.id}"
+    expect(response).to be_success
+    expect(Idea.count).to eq 0
   end
 end
