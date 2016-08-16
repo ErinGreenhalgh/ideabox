@@ -1,10 +1,10 @@
 class Api::V1::IdeasController < ApplicationController
   def index
-    render json: Idea.all
+    render json: Idea.all_descending
   end
 
   def create
-    Idea.create(idea_params)
+    render json: Idea.create(idea_params)
   end
 
   private
