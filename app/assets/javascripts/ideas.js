@@ -6,15 +6,14 @@ $(document).ready(function(){
     success: function(ideas){
       $(ideas).each(function(index, idea){
         $(".ideas-list").append(
-          "<div class='idea-full' id=" + idea.id
+          "<div class='idea-full' data-id=" + idea.id
           + "><div class='idea-body'>"
-          + "<div id='title' contenteditable='true'>" + idea.title + "</div>"
-          + "<div id='body' contenteditable='true'>" + idea.body + "</div>"
+          + "<div class='title' id='title-'" + idea.id + " contenteditable='true'>" + idea.title + "</div>"
+          + "<div class='body' id='body-'" + idea.id + " contenteditable='true'>" + idea.body + "</div>"
           + "<div class='idea-features'>"
           + idea.quality
           + "<button data-id=" + idea.id + " class='btn btn-success delete-idea' type='button'>Delete</button>"
           + "</div></div>"
-          // ideaFormatting(idea)
         )
       })
     },
@@ -22,17 +21,6 @@ $(document).ready(function(){
       console.log(errorResponse)
     }
   })
-
-  // function ideaFormatting(idea){
-  //   "<div class='idea-full' id=" + idea.id
-  //   + "><div class='idea-body'>"
-  //   + "<div id='title'>" + idea.title + "</div>"
-  //   + "<div id='body'>" + idea.body + "</div>"
-  //   + "<div class='idea-features'>"
-  //   + idea.quality
-  //   + "<button data-id=" + idea.id + " class='btn btn-success delete-idea' type='button'>Delete</button>"
-  //   + "</div></div>"
-  // };
 
   $("#save-idea").on('click', function(){
     var ideaTitle = $(".create-title").val();
@@ -45,10 +33,10 @@ $(document).ready(function(){
       data: ideaData,
       success: function(idea){
         $(".ideas-list").prepend(
-          "<div class='idea-full' id=" + idea.id
+          "<div class='idea-full' data-id=" + idea.id
           + "><div class='idea-body'>"
-          + "<div id='title' contenteditable='true'>" + idea.title + "</div>"
-          + "<div id='body' contenteditable='true'>" + idea.body + "</div>"
+          + "<div class='title' id='title-'" + idea.id + " contenteditable='true'>" + idea.title + "</div>"
+          + "<div class='body' id='body-'" + idea.id + " contenteditable='true'>" + idea.body + "</div>"
           + "<div class='idea-features'>"
           + idea.quality
           + "<button data-id=" + idea.id + " class='btn btn-success delete-idea' type='button'>Delete</button>"
@@ -76,19 +64,51 @@ $(document).ready(function(){
     })
   })
 
-  $(".ideas-list").on("click", "#title", function(){
+  function errorMessage(errorResponse){
+    console.log(errorResponse);
+  }
+
+  $(".ideas-list").on("click", ".title", function(){
     $(this).toggleClass("contenteditable")
   })
 
   $(".ideas-list").on("click", "#body", function(){
     $(this).toggleClass("contenteditable")
   })
-  // $(".ideas-list").on("click", ".idea-body", function(){
-  //   console.log(this)
-  //   $(this).toggleClass("contenteditable")
-  // })
 
-  $(".ideas-list").on("blur")
+  $(".ideas-list").on("blur", ".title", function(){
+    var ideaId = $(this).parent().parent().data("id");
+    var editedTitle = $(this).text();
+    $.ajax({
+      url: "/api/v1/ideas/" + ideaId,
+      method: "PATCH",
+      dataType: "JSON",
+      data: { idea: { title: editedTitle } },
+      success: function(idea){
+        $("#title-" + idea.id).text(
+          editedTitle
+        )
+      },
+      error: errorMessage,
+    });
+  })
+
+  $(".ideas-list").on("blur", ".body", function(){
+    var ideaId = $(this).parent().parent().data("id");
+    var editedBody = $(this).text();
+    $.ajax({
+      url: "/api/v1/ideas/" + ideaId,
+      method: "PATCH",
+      dataType: "JSON",
+      data: { idea: { body: editedBody } },
+      success: function(idea){
+        $("#body-" + idea.id).text(
+          editedBody
+        )
+      },
+      error: errorMessage,
+    });
+  })
 
 
 });
