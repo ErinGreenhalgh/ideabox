@@ -46,9 +46,7 @@ $(document).ready(function(){
     })
   })
 
-  function errorMessage(errorResponse){
-    console.log(errorResponse);
-  }
+
 
   $(".ideas-list").on("click", ".title", function(){
     $(this).toggleClass("contenteditable")
