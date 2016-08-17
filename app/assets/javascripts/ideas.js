@@ -8,11 +8,13 @@ $(document).ready(function(){
         $(".ideas-list").append(
           "<div class='idea-full' id=" + idea.id
           + "><div class='idea-body'>"
-          + idea.title + "<br>" + idea.body + "</div>"
+          + "<div id='title' contenteditable='true'>" + idea.title + "</div>"
+          + "<div id='body' contenteditable='true'>" + idea.body + "</div>"
           + "<div class='idea-features'>"
           + idea.quality
           + "<button data-id=" + idea.id + " class='btn btn-success delete-idea' type='button'>Delete</button>"
           + "</div></div>"
+          // ideaFormatting(idea)
         )
       })
     },
@@ -20,6 +22,17 @@ $(document).ready(function(){
       console.log(errorResponse)
     }
   })
+
+  // function ideaFormatting(idea){
+  //   "<div class='idea-full' id=" + idea.id
+  //   + "><div class='idea-body'>"
+  //   + "<div id='title'>" + idea.title + "</div>"
+  //   + "<div id='body'>" + idea.body + "</div>"
+  //   + "<div class='idea-features'>"
+  //   + idea.quality
+  //   + "<button data-id=" + idea.id + " class='btn btn-success delete-idea' type='button'>Delete</button>"
+  //   + "</div></div>"
+  // };
 
   $("#save-idea").on('click', function(){
     var ideaTitle = $(".create-title").val();
@@ -32,9 +45,10 @@ $(document).ready(function(){
       data: ideaData,
       success: function(idea){
         $(".ideas-list").prepend(
-          "<div class='idea-full' data-id=" + idea.id
+          "<div class='idea-full' id=" + idea.id
           + "><div class='idea-body'>"
-          + idea.title + "<br>" + idea.body + "</div>"
+          + "<div id='title' contenteditable='true'>" + idea.title + "</div>"
+          + "<div id='body' contenteditable='true'>" + idea.body + "</div>"
           + "<div class='idea-features'>"
           + idea.quality
           + "<button data-id=" + idea.id + " class='btn btn-success delete-idea' type='button'>Delete</button>"
@@ -61,6 +75,20 @@ $(document).ready(function(){
       }
     })
   })
+
+  $(".ideas-list").on("click", "#title", function(){
+    $(this).toggleClass("contenteditable")
+  })
+
+  $(".ideas-list").on("click", "#body", function(){
+    $(this).toggleClass("contenteditable")
+  })
+  // $(".ideas-list").on("click", ".idea-body", function(){
+  //   console.log(this)
+  //   $(this).toggleClass("contenteditable")
+  // })
+
+  $(".ideas-list").on("blur")
 
 
 });
