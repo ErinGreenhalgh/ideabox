@@ -11,6 +11,10 @@ class Api::V1::IdeasController < ApplicationController
     Idea.delete(params[:id])
   end
 
+  def update
+    render json: Idea.update(params[:id], idea_params)
+  end
+
   private
 
   def idea_params

@@ -36,4 +36,17 @@ RSpec.describe "api::v1::ideas controller" do
     expect(response).to be_success
     expect(Idea.count).to eq 0
   end
+
+  it "updates an idea" do
+    old_idea = create(:idea)
+    idea_data = {title: "New Title", body: "new body"}
+    patch "/api/v1/ideas/#{old_idea.id}", params: { idea: idea_data }
+    updated_idea = Idea.find(old_idea.id)
+    expect(response).to be_success
+    expect(updated_idea.title).to eq idea_data[:title]
+    expect(updated_idea.body).to eq idea_data[:body]
+    data = JSON.parse(response.body)
+    expect(data["title"]).to eq updated_idea.title
+    expect(data["body"]).to eq updated_idea.body
+  end
 end
