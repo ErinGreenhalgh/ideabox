@@ -1,6 +1,6 @@
 function ideaStructure(idea){
-  return "<div class='idea-full' data-id=" + idea.id
-            + "><div class='idea-body'>"
+  return "<div class='idea-full' id='full-" + idea.id
+            + "'><div class='idea-body'>"
               + "<div class='title' id='title-" + idea.id
               + "' contenteditable='true'>" + idea.title + "</div>"
               + "<div class='body' id='body-" + idea.id
