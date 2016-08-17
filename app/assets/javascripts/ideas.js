@@ -6,9 +6,10 @@ $(document).ready(function(){
     success: function(ideas){
       $(ideas).each(function(index, idea){
         $(".ideas-list").append(
-          "<div class='idea-full' id=" + idea.id
+          "<div class='idea-full' data-id=" + idea.id
           + "><div class='idea-body'>"
-          + idea.title + "<br>" + idea.body + "</div>"
+          + "<div class='title' id='title-'" + idea.id + " contenteditable='true'>" + idea.title + "</div>"
+          + "<div class='body' id='body-'" + idea.id + " contenteditable='true'>" + idea.body + "</div>"
           + "<div class='idea-features'>"
           + idea.quality
           + "<button data-id=" + idea.id + " class='btn btn-success delete-idea' type='button'>Delete</button>"
@@ -34,7 +35,8 @@ $(document).ready(function(){
         $(".ideas-list").prepend(
           "<div class='idea-full' data-id=" + idea.id
           + "><div class='idea-body'>"
-          + idea.title + "<br>" + idea.body + "</div>"
+          + "<div class='title' id='title-'" + idea.id + " contenteditable='true'>" + idea.title + "</div>"
+          + "<div class='body' id='body-'" + idea.id + " contenteditable='true'>" + idea.body + "</div>"
           + "<div class='idea-features'>"
           + idea.quality
           + "<button data-id=" + idea.id + " class='btn btn-success delete-idea' type='button'>Delete</button>"
@@ -60,6 +62,52 @@ $(document).ready(function(){
         console.log(errorResponse)
       }
     })
+  })
+
+  function errorMessage(errorResponse){
+    console.log(errorResponse);
+  }
+
+  $(".ideas-list").on("click", ".title", function(){
+    $(this).toggleClass("contenteditable")
+  })
+
+  $(".ideas-list").on("click", "#body", function(){
+    $(this).toggleClass("contenteditable")
+  })
+
+  $(".ideas-list").on("blur", ".title", function(){
+    var ideaId = $(this).parent().parent().data("id");
+    var editedTitle = $(this).text();
+    $.ajax({
+      url: "/api/v1/ideas/" + ideaId,
+      method: "PATCH",
+      dataType: "JSON",
+      data: { idea: { title: editedTitle } },
+      success: function(idea){
+        $("#title-" + idea.id).text(
+          editedTitle
+        )
+      },
+      error: errorMessage,
+    });
+  })
+
+  $(".ideas-list").on("blur", ".body", function(){
+    var ideaId = $(this).parent().parent().data("id");
+    var editedBody = $(this).text();
+    $.ajax({
+      url: "/api/v1/ideas/" + ideaId,
+      method: "PATCH",
+      dataType: "JSON",
+      data: { idea: { body: editedBody } },
+      success: function(idea){
+        $("#body-" + idea.id).text(
+          editedBody
+        )
+      },
+      error: errorMessage,
+    });
   })
 
 
