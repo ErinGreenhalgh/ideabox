@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Idea.create(title: "My Greatest Idea Ever", body: "seriously")
+Idea.create(title: "Less Great", body: "but still pretty good")
+Idea.create(title: "AwesomeSauce", body: "awesomesauce.com")

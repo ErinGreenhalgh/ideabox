@@ -5,16 +5,7 @@ $(document).ready(function(){
     dataType: "JSON",
     success: function(ideas){
       $(ideas).each(function(index, idea){
-        $(".ideas-list").append(
-          "<div class='idea-full' data-id=" + idea.id
-          + "><div class='idea-body'>"
-          + "<div class='title' id='title-'" + idea.id + " contenteditable='true'>" + idea.title + "</div>"
-          + "<div class='body' id='body-'" + idea.id + " contenteditable='true'>" + idea.body + "</div>"
-          + "<div class='idea-features'>"
-          + idea.quality
-          + "<button data-id=" + idea.id + " class='btn btn-success delete-idea' type='button'>Delete</button>"
-          + "</div></div>"
-        )
+        $(".ideas-list").append(ideaStructure(idea))
       })
     },
     error: function(errorResponse){
@@ -32,16 +23,7 @@ $(document).ready(function(){
       dataType: "JSON",
       data: ideaData,
       success: function(idea){
-        $(".ideas-list").prepend(
-          "<div class='idea-full' data-id=" + idea.id
-          + "><div class='idea-body'>"
-          + "<div class='title' id='title-'" + idea.id + " contenteditable='true'>" + idea.title + "</div>"
-          + "<div class='body' id='body-'" + idea.id + " contenteditable='true'>" + idea.body + "</div>"
-          + "<div class='idea-features'>"
-          + idea.quality
-          + "<button data-id=" + idea.id + " class='btn btn-success delete-idea' type='button'>Delete</button>"
-          + "</div></div>"
-        )
+        $(".ideas-list").prepend(ideaStructure(idea))
       },
       error: function(errorResponse){
         console.log(errorResponse)
@@ -64,9 +46,7 @@ $(document).ready(function(){
     })
   })
 
-  function errorMessage(errorResponse){
-    console.log(errorResponse);
-  }
+
 
   $(".ideas-list").on("click", ".title", function(){
     $(this).toggleClass("contenteditable")
