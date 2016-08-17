@@ -38,7 +38,7 @@ $(document).ready(function(){
       method: "DELETE",
       data: ideaId,
       success: function(idea){
-        $(".idea-full#" + ideaId ).remove()
+        $("#full-" + ideaId ).remove()
       },
       error: function(errorResponse){
         console.log(errorResponse)
