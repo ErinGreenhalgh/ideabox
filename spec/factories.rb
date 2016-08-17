@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :idea do
     title
     body
-    quality 0
+    quality "swill"
   end
 
   sequence :title do |n|
