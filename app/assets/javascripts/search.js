@@ -6,9 +6,9 @@ $(document).ready(function(){
       var ideaText = $(this).find(".title,.body").text().toLowerCase()
       var idea = $(this).parent()
       if (ideaText.includes(searchText)){
-        idea.show();
+        idea.show("slide");
       } else {
-        idea.hide();
+        idea.hide("slide");
       }
     })
   })

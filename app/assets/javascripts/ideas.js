@@ -59,7 +59,7 @@ $(document).ready(function(){
   })
 
   $(".ideas-list").on("blur", ".title", function(){
-    var ideaId = $(this).parent().parent().data("id");
+    var ideaId = $(this).attr("id").slice(-1)
     var editedTitle = $(this).text();
     $.ajax({
       url: "/api/v1/ideas/" + ideaId,
@@ -76,7 +76,7 @@ $(document).ready(function(){
   })
 
   $(".ideas-list").on("blur", ".body", function(){
-    var ideaId = $(this).parent().parent().data("id");
+    var ideaId = $(this).attr("id").slice(-1);
     var editedBody = $(this).text();
     $.ajax({
       url: "/api/v1/ideas/" + ideaId,
