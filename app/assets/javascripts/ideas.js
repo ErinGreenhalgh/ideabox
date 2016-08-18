@@ -24,6 +24,8 @@ $(document).ready(function(){
       data: ideaData,
       success: function(idea){
         $(".ideas-list").prepend(ideaStructure(idea))
+        $(".create-title").val("")
+        $(".create-body").val("")
       },
       error: function(errorResponse){
         console.log(errorResponse)
