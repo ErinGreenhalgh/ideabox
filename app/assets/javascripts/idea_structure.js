@@ -4,7 +4,7 @@ function ideaStructure(idea){
               + "<div class='title' id='title-" + idea.id
               + "' contenteditable='true'>" + idea.title + "</div>"
               + "<div class='body' id='body-" + idea.id
-              + "' contenteditable='true'>" + idea.body + "</div>"
+              + "' contenteditable='true'>" + idea.body + "</div></div>"
             + "<div class='idea-features' data-id=" + idea.id + ">"
               + "<div class='quality' id='quality-" + idea.id + "'>"
               + idea.quality + "</div>"
