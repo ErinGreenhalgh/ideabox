@@ -1,14 +1,12 @@
 $(document).ready(function(){
 
   function improveQuality(currentQuality){
-    // console.log(currentQuality)
     if (currentQuality == "swill") {
       currentQuality = "plausible"
     } else {
       currentQuality = "genius"
     }
     return currentQuality
-    // console.log(currentQuality)
   }
 
   function downgradeQuality(currentQuality){

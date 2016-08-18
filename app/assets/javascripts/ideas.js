@@ -48,8 +48,6 @@ $(document).ready(function(){
     })
   })
 
-
-
   $(".ideas-list").on("click", ".title", function(){
     $(this).toggleClass("contenteditable")
   })
@@ -91,6 +89,4 @@ $(document).ready(function(){
       error: errorMessage,
     });
   })
-
-
 });
