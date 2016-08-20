@@ -27,6 +27,10 @@ group :development, :test do
   gem "pry", :require => "pry"
   gem "simplecov"
 end
+group :test do
+  gem 'database_cleaner'
+  gem 'selenium-webdriver'
+end
 
 group :development do
   gem 'web-console'

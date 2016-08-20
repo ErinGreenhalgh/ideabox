@@ -12,6 +12,7 @@ class Api::V1::IdeasController < ApplicationController
   end
 
   def update
+    # binding.pry
     render json: Idea.update(params[:id], idea_params)
   end
 
