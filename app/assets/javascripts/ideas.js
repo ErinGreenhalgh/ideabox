@@ -52,7 +52,7 @@ $(document).ready(function(){
     $(this).toggleClass("contenteditable")
   })
 
-  $(".ideas-list").on("click", "#body", function(){
+  $(".ideas-list").on("click", ".body", function(){
     $(this).toggleClass("contenteditable")
   })
 
