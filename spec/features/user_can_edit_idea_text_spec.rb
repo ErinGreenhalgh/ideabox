@@ -6,7 +6,7 @@ RSpec.feature "user can edit idea text" do
   scenario "by clicking on the title text", js: true do
     idea
     visit "/"
-    element = find("div[id='title-1']").send_keys("#{update}")
+    find("div[id='title-1']").send_keys("#{update}")
     page.find("body").click
     expect(page).to have_content(idea.title + update)
 
